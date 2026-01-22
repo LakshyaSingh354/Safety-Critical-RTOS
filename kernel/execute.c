@@ -1,5 +1,5 @@
 #include "execute.h"
-#include "kernel_time.h"
+#include "kernel.h"
 
 void kernel_execute_task(task_t *t) {
     uint32_t start = kernel_time_now();
@@ -27,7 +27,7 @@ void kernel_execute_task(task_t *t) {
         t->state = TASK_DEADLINE_MISSED;
         return;
     }
-
+    active_ticks += (end - start);
     /* Task completed successfully */
     t->state = TASK_WAITING;
 }

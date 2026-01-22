@@ -1,6 +1,6 @@
 #include "release.h"
 #include "task.h"
-#include "kernel_time.h"
+#include "kernel.h"
 
 extern task_t tasks[];
 extern const uint32_t task_count;

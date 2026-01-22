@@ -1,6 +1,6 @@
 #include "timer.h"
 #include "../../event_control/event.h"
-#include "../../kernel/kernel_time.h"
+#include "../../kernel/kernel.h"
 
 #define TIMER0_BASE     0x40030000
 
