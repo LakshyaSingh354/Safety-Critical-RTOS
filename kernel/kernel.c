@@ -1,5 +1,7 @@
 #include "kernel.h"
 #include "release.h"
+#include "task.h"
+#include "scheduler.h"
 #include "../drivers/gptm/timer.h"
 
 void kernel_init(void) {
@@ -8,5 +10,14 @@ void kernel_init(void) {
 }
 
 void kernel_run(void) {
-    kernel_release_tasks();
+    while (1) {
+        kernel_release_tasks();
+
+        task_t *t = kernel_schedule();
+        if (t) {
+            /* execution comes next */
+        }
+
+        /* idle comes later */
+    }
 }
