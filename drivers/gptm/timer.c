@@ -31,7 +31,7 @@ void timer_init(void) {
     GPTM_TAMR = 0x2;
 
     // Load value 
-    GPTM_TAILR = 16000000;
+    GPTM_TAILR = 400000;
 
     // Enable timeout interrupt
     GPTM_IMR |= (1 << 0);

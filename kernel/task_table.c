@@ -1,12 +1,12 @@
 #include "task.h"
 
-void task_control(void);
-void task_monitor(void);
+void task_hog(void);
+void task_victim(void);
 
 task_t tasks[] = {
     {
-        .name = "control",
-        .run = task_control,
+        .name = "hog",
+        .run = task_hog,
         .period_ticks = 10,
         .deadline_ticks = 10,
         .wcet_ticks = 2,
@@ -14,13 +14,13 @@ task_t tasks[] = {
         .next_release = 10,
     },
     {
-        .name = "monitor",
-        .run = task_monitor,
-        .period_ticks = 50,
-        .deadline_ticks = 50,
+        .name = "victim",
+        .run = task_victim,
+        .period_ticks = 10,
+        .deadline_ticks = 2,
         .wcet_ticks = 5,
         .state = TASK_WAITING,
-        .next_release = 50,
+        .next_release = 13,
     }
 };
 
