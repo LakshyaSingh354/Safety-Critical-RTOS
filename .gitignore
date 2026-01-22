@@ -1,0 +1,4 @@
+qemu
+firmware.elf
+.vscode
+*.o
