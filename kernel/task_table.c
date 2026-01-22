@@ -11,6 +11,7 @@ task_t tasks[] = {
         .deadline_ticks = 10,
         .wcet_ticks = 2,
         .state = TASK_WAITING,
+        .next_release = 10,
     },
     {
         .name = "monitor",
@@ -19,6 +20,7 @@ task_t tasks[] = {
         .deadline_ticks = 50,
         .wcet_ticks = 5,
         .state = TASK_WAITING,
+        .next_release = 50,
     }
 };
 
