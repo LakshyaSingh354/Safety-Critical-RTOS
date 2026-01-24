@@ -1,6 +1,7 @@
 #include "idle.h"
 #include "task.h"
 #include "kernel.h"
+#include "../metrics/metrics.h"
 
 extern task_t tasks[];
 extern const uint32_t task_count;
@@ -23,5 +24,6 @@ void kernel_idle(void) {
     uint32_t before = kernel_time_now();
     __asm volatile ("wfi");
     uint32_t after = kernel_time_now();
+    metrics_on_idle(before, after);
     idle_ticks += (after - before);
 }

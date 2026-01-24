@@ -1,6 +1,7 @@
 #include "release.h"
 #include "task.h"
 #include "kernel.h"
+#include "../metrics/metrics.h"
 
 extern task_t tasks[];
 extern const uint32_t task_count;
@@ -12,6 +13,8 @@ void kernel_release_tasks(void) {
         task_t *t = &tasks[i];
 
         if (t->state == TASK_WAITING && now >= t->next_release) {
+            uint32_t expected_release = t->next_release;
+            metrics_on_release(t, now, expected_release);
             t->state = TASK_READY;
 
             /*

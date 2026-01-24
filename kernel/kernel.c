@@ -5,6 +5,8 @@
 #include "execute.h"
 #include "idle.h"
 #include "../drivers/gptm/timer.h"
+#include "../metrics/metrics.h"
+#include "../metrics/workload.h"
 
 void kernel_time_tick_from_isr(void) {
     kernel_ticks++;
@@ -18,10 +20,13 @@ void kernel_init(void) {
     kernel_ticks = 0;
     // driver initialization
     timer_init();
+    workload_init();
+    metrics_init();
 }
 
 void kernel_run(void) {
     while (1) {
+        metrics_poll(kernel_time_now());
         kernel_release_tasks();
 
         task_t *t = kernel_schedule();

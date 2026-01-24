@@ -1,0 +1,64 @@
+#pragma once
+#include <stdint.h>
+
+/* Timer tick configuration */
+#define TICK_US 500u
+#define US_TO_TICKS(us) ((uint32_t)(((us) + (TICK_US - 1u)) / TICK_US))
+#define MS_TO_TICKS(ms) US_TO_TICKS((ms) * 1000u)
+
+/* Metrics collection controls */
+#define METRICS_ENABLED 1
+#define METRICS_MAX_TASKS 8u
+
+/* Measurement window */
+#define METRICS_WARMUP_TICKS MS_TO_TICKS(0u)
+#define METRICS_REPORT_PERIOD_TICKS MS_TO_TICKS(5000u)
+#define METRICS_REPORT_ONCE 1
+#define METRICS_RESET_ON_REPORT 1
+
+/* Output controls */
+#define METRICS_OUTPUT_UART 1
+
+/* Workload simulation profiles */
+#define WORKLOAD_PROFILE_STATIC 0
+#define WORKLOAD_PROFILE_STEP   1
+#define WORKLOAD_PROFILE_RAMP   2
+#define WORKLOAD_PROFILE_SPIKE  3
+
+#define WORKLOAD_PROFILE WORKLOAD_PROFILE_STATIC
+
+/* Workload configuration */
+#define WORKLOAD_TASK_COUNT 3u
+
+#define WORKLOAD_TASK0_NAME "wl0"
+#define WORKLOAD_TASK0_PERIOD_TICKS MS_TO_TICKS(5u)
+#define WORKLOAD_TASK0_DEADLINE_TICKS US_TO_TICKS(4000u)
+#define WORKLOAD_TASK0_WCET_TICKS US_TO_TICKS(2500u)
+#define WORKLOAD_TASK0_START_OFFSET US_TO_TICKS(1000u)
+#define WORKLOAD_TASK0_BASE_ITERS 1000000
+
+#define WORKLOAD_TASK1_NAME "wl1"
+#define WORKLOAD_TASK1_PERIOD_TICKS MS_TO_TICKS(10u)
+#define WORKLOAD_TASK1_DEADLINE_TICKS US_TO_TICKS(7500u)
+#define WORKLOAD_TASK1_WCET_TICKS MS_TO_TICKS(4u)
+#define WORKLOAD_TASK1_START_OFFSET US_TO_TICKS(2500u)
+#define WORKLOAD_TASK1_BASE_ITERS 1000000
+
+#define WORKLOAD_TASK2_NAME "wl2"
+#define WORKLOAD_TASK2_PERIOD_TICKS MS_TO_TICKS(25u)
+#define WORKLOAD_TASK2_DEADLINE_TICKS US_TO_TICKS(17500u)
+#define WORKLOAD_TASK2_WCET_TICKS MS_TO_TICKS(6u)
+#define WORKLOAD_TASK2_START_OFFSET US_TO_TICKS(5500u)
+#define WORKLOAD_TASK2_BASE_ITERS 1000000
+
+/* Step profile: alternate low/high load every period */
+#define WORKLOAD_STEP_PERIOD_TICKS MS_TO_TICKS(25u)
+#define WORKLOAD_STEP_MULTIPLIER 3u
+
+/* Ramp profile: increase load each step, then wrap */
+#define WORKLOAD_RAMP_STEP_TICKS US_TO_TICKS(12500u)
+#define WORKLOAD_RAMP_STEPS 4u
+
+/* Spike profile: inject a spike at intervals */
+#define WORKLOAD_SPIKE_PERIOD_TICKS MS_TO_TICKS(20u)
+#define WORKLOAD_SPIKE_MULTIPLIER 6u

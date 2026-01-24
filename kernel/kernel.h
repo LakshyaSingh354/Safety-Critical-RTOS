@@ -1,4 +1,5 @@
 #pragma once
+#include <stdint.h>
 
 static volatile uint32_t kernel_ticks;
 static volatile uint32_t idle_ticks;
