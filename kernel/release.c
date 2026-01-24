@@ -14,6 +14,7 @@ void kernel_release_tasks(void) {
 
         if (t->state == TASK_WAITING && now >= t->next_release) {
             uint32_t expected_release = t->next_release;
+            t->abs_deadline = now + t->deadline_ticks;
             metrics_on_release(t, now, expected_release);
             t->state = TASK_READY;
 

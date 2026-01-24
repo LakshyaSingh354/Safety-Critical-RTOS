@@ -17,6 +17,7 @@ typedef struct task {
     uint32_t period_ticks;
     uint32_t deadline_ticks;
     uint32_t wcet_ticks;
+    uint32_t abs_deadline;
 
     /* Kernel-managed state */
     uint32_t next_release;
